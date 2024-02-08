@@ -58,9 +58,4 @@ This project is inspired by "An Introduction to Copulas" by Roger B. Nelsen. The
 ## References
 
 - Nelsen, R. B. (2006). *An Introduction to Copulas*. Springer.
-- Various contributions in the field of copula research and financial modeling.
 - The developers and contributors of the Shiny, quantmod, copula, ggplot2, ggExtra, and shinythemes packages.
-
----
-
-This README template is structured to provide clarity about the application's purpose, instructions for setup and usage, and the appropriate acknowledgements. You can adjust the content according to any additional features or specific instructions related to your application.
