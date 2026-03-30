@@ -7,6 +7,9 @@ library(shinythemes)
 symbols_df <- read.csv("data/ticker_data.csv")
 symbol_vectors <- symbols_df[["Symbol"]]
 names(symbol_vectors) <- symbols_df[["Name"]]
+
+previous_returns_data <- NULL
+
 # UI ----
 ui <- fluidPage(
   theme = shinytheme("sandstone"),
@@ -53,6 +56,7 @@ server <- function(input, output) {
       if (!is.null(previous_returns_data)) {
         return(previous_returns_data)  
       }
+      return(NULL)
     }
     
     # Fetch historical data
@@ -72,7 +76,8 @@ server <- function(input, output) {
   
   # Reactive expression for simulated data based on chosen copula
   simulated_data_reactive <- reactive({
-    returns_data <- returns_data_reactive() # Fetch the reactive returns data
+    returns_data <- returns_data_reactive()
+    req(returns_data)
     u_stock1 <- as.numeric(ecdf(returns_data[,1])(returns_data[,1]))
     u_stock2 <- as.numeric(ecdf(returns_data[,2])(returns_data[,2]))
     cor_value <- cor(u_stock1, u_stock2)
@@ -116,6 +121,13 @@ server <- function(input, output) {
   
   
   
+  output$correlationText <- renderText({
+    returns_data <- returns_data_reactive()
+    req(returns_data)
+    cor_val <- cor(as.numeric(returns_data[,1]), as.numeric(returns_data[,2]), use = "complete.obs")
+    paste("Pearson correlation between", input$stock1, "and", input$stock2, "log returns:", round(cor_val, 4))
+  })
+
   output$combinedPlot <- renderPlot({
     # Use the reactive expression to get combined data for real and simulated returns
     combined_data <- simulated_data_reactive() # This correctly accesses the combined data
