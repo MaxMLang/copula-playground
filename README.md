@@ -10,6 +10,8 @@
 
 The Quant Copula Playground is a Shiny application designed for financial analysts, researchers, and enthusiasts interested in exploring the dependencies between stock returns using various copula models. It leverages the power of copulas to model and simulate the joint distribution of stock returns, offering insights beyond traditional correlation measures. This application is inspired by seminal works in the field of copulas, particularly "An Introduction to Copulas" by Roger B. Nelsen.
 
+Please be aware of the flaws of copulas, see ["Recipe for Disaster: The Formula That Killed Wall Street"](https://www.wired.com/2009/02/wp-quant/)  by WIRED.
+
 ## Features
 
 - Selection of stock pairs from a predefined list for analysis.
